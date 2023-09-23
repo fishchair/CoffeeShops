@@ -10,12 +10,16 @@ import MapKit
 
 struct TextFieldClearButton: ViewModifier {
     @Binding var text: String
+    @Binding var searchResults: [MKMapItem]
     func body(content: Content) -> some View {
         HStack {
             content
             if !text.isEmpty {
                 Button (
-                    action: {self.text = ""},
+                    action: {
+                        self.text = ""
+                        searchResults = []
+                    },
                     label: {
                         Image(systemName: "x.circle")
                         .foregroundColor(Color(UIColor.opaqueSeparator))
@@ -34,14 +38,18 @@ struct SearchButton: View {
     // hold search text
     @State private var searchText: String = ""
     @FocusState private var isFieldFocused: Bool
+    
+    // camera position and visible region
+    @Binding var position: MapCameraPosition
+    var visibleRegion: MKCoordinateRegion?
 
     func search(for query: String) {
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = query
         request.resultTypes = .pointOfInterest
-        request.region = MKCoordinateRegion(
+        request.region = visibleRegion ?? MKCoordinateRegion(
             center: .fish_house,
-            span: MKCoordinateSpan(latitudeDelta: 0.0125, longitudeDelta: 0.0125)
+            span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
         )
         Task {
             let search = MKLocalSearch(request: request)
@@ -63,7 +71,7 @@ struct SearchButton: View {
             TextField ("", 
                        text: $searchText,
                        prompt: Text("Search for a coffee shop").foregroundColor(.gray))
-                .modifier(TextFieldClearButton(text: $searchText))
+                .modifier(TextFieldClearButton(text: $searchText, searchResults: $searchResults))
                 .padding()
                 .background(Color.white).cornerRadius(20)
                 .foregroundColor(.black)
