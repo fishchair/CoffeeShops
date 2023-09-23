@@ -22,34 +22,56 @@ extension CLLocationCoordinate2D {
 
 struct MapView: View {
     
-    @State private var position: MapCameraPosition = .automatic
-        //.userLocation(fallback:.automatic)
+    // center map around the house with zoom view of 20k
+    @State var position: MapCameraPosition = .region(
+        MKCoordinateRegion(center: .fish_house, latitudinalMeters: 10000, longitudinalMeters: 10000)
+    )
     
-    @State private var searchText = ""
+    // state here will capture results form binding in SearchButton
+    @State private var searchResults: [MKMapItem] = []
     
-    @Namespace var mapScope
+    // capture text input
+    @State private var searchText: String = ""
     
     var body: some View {
-        Map(position: $position, scope: mapScope) {
-            Annotation(
-                "Fish House",
-                coordinate:.fish_house,
-                anchor:.bottom) {
-                    Image(systemName: "house.fill")
-                        .padding(4)
-                        .foregroundStyle(.white)
-                        .background(Color.indigo)
-                        .cornerRadius(4)
+        VStack{
+            // show the map
+            Map (position: $position) {
+                Annotation(
+                    "Fish House",
+                    coordinate:.fish_house,
+                    anchor:.bottom) {
+                        Image(systemName: "house.fill")
+                            .padding(1)
+                            .foregroundStyle(.white)
+                            .background(Color.indigo)
+                            .cornerRadius(4)
+                            .font(.system(size: 8))
+                    }
+                    .annotationTitles(.hidden)
+                
+                // display all the search results from SearchButton
+                ForEach(searchResults, id: \.self) { result in
+                    // TODO: make marker look better
+                    Marker(item: result)
                 }
-                .annotationTitles(.hidden)
-            
-            UserAnnotation()
-        }
-        .mapStyle(.standard(elevation: .realistic))  // 3d map
-        .mapControls {
-            MapUserLocationButton()
-            MapCompass()
-            MapScaleView()
+                
+                UserAnnotation()  // add little blue location dot
+            }
+            .mapStyle(.standard(elevation: .realistic))  // 3d map
+            .mapControls {
+                MapUserLocationButton()  // arrow
+                MapCompass()  // point north
+                MapScaleView()  // distance bar on zoom
+            }
+            .safeAreaInset(edge: .bottom) {
+                HStack {
+                    Spacer()
+                    SearchButton(searchResults: $searchResults)
+                        .padding(.bottom)
+                    Spacer()
+                }
+            }
         }
     }
 }

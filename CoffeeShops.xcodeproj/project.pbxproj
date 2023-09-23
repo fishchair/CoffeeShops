@@ -20,6 +20,7 @@
 		C15F7C8F2ABD49A300717317 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15F7C8E2ABD49A300717317 /* MapView.swift */; };
 		C15F7C912ABD4A0500717317 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15F7C902ABD4A0500717317 /* AddView.swift */; };
 		C15F7C932ABD4A4500717317 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15F7C922ABD4A4500717317 /* ListView.swift */; };
+		C15F7C952ABE4A9B00717317 /* SearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15F7C942ABE4A9B00717317 /* SearchButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		C15F7C8E2ABD49A300717317 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		C15F7C902ABD4A0500717317 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		C15F7C922ABD4A4500717317 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		C15F7C942ABE4A9B00717317 /* SearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				C15F7C922ABD4A4500717317 /* ListView.swift */,
 				C15F7C902ABD4A0500717317 /* AddView.swift */,
 				C15F7C8E2ABD49A300717317 /* MapView.swift */,
+				C15F7C942ABE4A9B00717317 /* SearchButton.swift */,
 				C15F7C8C2ABD496F00717317 /* HomeView.swift */,
 				C15F7C5E2ABD459200717317 /* ContentView.swift */,
 				C15F7C602ABD459200717317 /* Item.swift */,
@@ -287,6 +290,7 @@
 				C15F7C612ABD459200717317 /* Item.swift in Sources */,
 				C15F7C8D2ABD496F00717317 /* HomeView.swift in Sources */,
 				C15F7C5D2ABD459200717317 /* CoffeeShopsApp.swift in Sources */,
+				C15F7C952ABE4A9B00717317 /* SearchButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
